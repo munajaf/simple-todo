@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Form = ({ addTodo, value, setValue }) => (
+const Form = ({ addTodo, todoRef }) => (
   <form onSubmit={addTodo}>
-    <input value={value} onChange={(e) => setValue(e.target.value)} />
+    <input ref={todoRef} />
     <button type="submit" onClick={addTodo}>Add</button>
   </form>
 );
 
 Form.propTypes = {
   addTodo: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired,
-  setValue: PropTypes.func.isRequired,
+  todoRef: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 export default Form;

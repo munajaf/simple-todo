@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Form from './component/Form';
 import List from './component/List';
 
 const App = () => {
   const [todo, setTodo] = useState([]);
-  const [value, setValue] = useState('');
-
+  const todoRef = useRef({});
   const addTodo = (e) => {
     e.preventDefault();
     const id = Math.random() * 999999;
-    setTodo([...todo, { id, value }]);
-    setValue('');
+    setTodo([...todo, { id, value: todoRef.current.value }]);
+    todoRef.current.value = '';
   };
 
   const removeTodo = (todoId) => {
@@ -20,9 +19,8 @@ const App = () => {
   return (
     <>
       <Form
-        value={value}
+        todoRef={todoRef}
         addTodo={addTodo}
-        setValue={setValue}
       />
       <br />
       <List
