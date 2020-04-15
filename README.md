@@ -1,3 +1,4 @@
 # Simple todo
 
-Its nothing, just wasting time with react
+Simple todo list with complicated eslint.
+im learning how to use PropTypes
