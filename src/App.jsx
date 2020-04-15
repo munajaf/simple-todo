@@ -15,7 +15,11 @@ const App = () => {
     todoRef.current.value = '';
   };
 
-  const removeTodo = (todoId) => setTodo(todo.filter(({ id }) => id !== todoId));
+  const removeTodo = (todoId) => {
+    // eslint-disable-next-line no-unused-expressions,no-alert
+    window.confirm('Confirm to remove ?')
+    && setTodo(todo.filter(({ id }) => id !== todoId));
+  };
 
   return (
     <>
