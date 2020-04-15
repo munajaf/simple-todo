@@ -1,25 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
 
 function App() {
+  const [todo, setTodo] = useState([]);
+  const [value, setValue] = useState('');
+
+  const addTodo = (e) => {
+    e.preventDefault();
+    const id = Math.random() * 999999
+    setTodo([...todo, {id, value}]);
+    setValue('');
+  }
+
+  const removeTodo = (todoId) => {
+    setTodo(todo.filter(({id}) => id !== todoId ));
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <form onSubmit={addTodo}>
+        <input value={value} onChange={(e) => setValue(e.target.value)} />
+        <button onClick={addTodo}>Add</button>
+      </form>
+      <br/>
+      <ul>
+        {todo.map(({value, id}) => 
+            <li key={id}>{value} <button onClick={() => removeTodo(id)}>X</button></li>
+        )}
+      </ul>
+    </>
   );
 }
 
