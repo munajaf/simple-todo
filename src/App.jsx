@@ -5,16 +5,17 @@ import List from './component/List';
 const App = () => {
   const [todo, setTodo] = useState([]);
   const todoRef = useRef({});
+
   const addTodo = (e) => {
     e.preventDefault();
     const id = Math.random() * 999999;
-    setTodo([...todo, { id, value: todoRef.current.value }]);
+    const { current: { value } } = todoRef;
+
+    setTodo([...todo, { id, value }]);
     todoRef.current.value = '';
   };
 
-  const removeTodo = (todoId) => {
-    setTodo(todo.filter(({ id }) => id !== todoId));
-  };
+  const removeTodo = (todoId) => setTodo(todo.filter(({ id }) => id !== todoId));
 
   return (
     <>
