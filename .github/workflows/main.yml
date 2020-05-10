@@ -8,7 +8,15 @@ jobs:
   deploy:
     runs-on: ubuntu-18.04
     steps:
-      - name: Deploy
+      - uses: actions/checkout@v2
+
+      - name: Install React Package
+        uses: borales/actions-yarn@v2.0.0
+
+      - name: Building React App
+        run: yarn build
+
+      - name: Deploy React App
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
