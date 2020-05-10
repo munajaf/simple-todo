@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 const List = ({ todo, removeTodo }) => (
   <ul>
@@ -13,9 +12,5 @@ const List = ({ todo, removeTodo }) => (
   </ul>
 );
 
-List.propTypes = {
-  todo: PropTypes.arrayOf(PropTypes.object).isRequired,
-  removeTodo: PropTypes.func.isRequired,
-};
 
 export default List;
