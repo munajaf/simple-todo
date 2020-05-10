@@ -1,24 +1,26 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import Form from './component/Form';
 import List from './component/List';
+import { addNew, deleteData } from './redux/actions';
 
 const App = () => {
-  const [todo, setTodo] = useState([]);
+  const dispatch = useDispatch();
+  const { todo } = useSelector((state) => state.newReducer, shallowEqual);
   const todoRef = useRef({});
 
   const addTodo = (e) => {
     e.preventDefault();
     const id = Math.random() * 999999;
     const { current: { value } } = todoRef;
-
-    setTodo([...todo, { id, value }]);
-    todoRef.current.value = '';
+    if (value.trim()) {
+      dispatch(addNew(id, value));
+      todoRef.current.value = '';
+    }
   };
 
   const removeTodo = (todoId) => {
-    // eslint-disable-next-line no-unused-expressions,no-alert
-    window.confirm('Confirm to remove ?')
-    && setTodo(todo.filter(({ id }) => id !== todoId));
+    dispatch(deleteData(todoId));
   };
 
   return (
