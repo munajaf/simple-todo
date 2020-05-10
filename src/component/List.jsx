@@ -1,18 +1,35 @@
 import React from 'react';
-import { ListData, Text } from './styled/List';
-import { Button } from './styled/global';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { useDispatch } from 'react-redux';
+import { reorderData } from '../redux/actions';
+import DraggableListData from './List/DraggableListData';
 
+const List = ({ todo, removeTodo }) => {
+  const dispatch = useDispatch();
 
-const List = ({ todo, removeTodo }) => (
-  <ul>
-    {todo.map(({ value, id }) => (
-      <ListData key={id}>
-        <Button remove type="submit" onClick={() => removeTodo(id)}>X</Button>
-        <Text>{value}</Text>
-      </ListData>
-    ))}
-  </ul>
-);
+  const onDragEnd = (result) => {
+    if (!result.destination || result.destination.index === result.source.index) {
+      return;
+    }
+    dispatch(reorderData(todo, result));
+  };
+
+  return (
+    <DragDropContext onDragEnd={onDragEnd}>
+      <ul>
+        <Droppable droppableId="list">
+          {(provided) => (
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            <div ref={provided.innerRef} {...provided.droppableProps}>
+              <DraggableListData todo={todo} removeTodo={removeTodo} />
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </ul>
+    </DragDropContext>
+  );
+};
 
 
 export default List;

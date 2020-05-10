@@ -11,7 +11,7 @@ const App = () => {
 
   const addTodo = (e) => {
     e.preventDefault();
-    const id = Math.random() * 999999;
+    const id = Math.floor(Math.random() * 999999);
     const { current: { value } } = todoRef;
     if (value.trim()) {
       dispatch(addNew(id, value));
