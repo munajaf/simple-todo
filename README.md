@@ -7,3 +7,7 @@ Simple list with redux,redux-thunk and react-beautiful-dnd.
 
 Most important things is that. it auto deploy to github pages once i push to master branch.
 you may look into `.github/workflows/main.yml`
+
+Added more function.
+if i added commit `[skip ci]`
+it will not try to build or run the action
