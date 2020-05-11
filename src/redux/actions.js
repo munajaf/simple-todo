@@ -3,7 +3,7 @@ import { ADD_NEW, DELETE, REORDER } from './constants';
 const reorder = (todo, { source, destination }) => {
   const result = Array.from(todo);
   const [removed] = result.splice(source.index, 1);
-  result.splice(destination.in, 0, removed);
+  result.splice(destination.index, 0, removed);
   return result;
 };
 
