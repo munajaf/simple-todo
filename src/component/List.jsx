@@ -32,5 +32,4 @@ const List = ({ todo, removeTodo }) => {
   );
 };
 
-
 export default List;
